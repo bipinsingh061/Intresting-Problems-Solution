@@ -1,0 +1,82 @@
+#include<bits/stdc++.h> 
+using namespace std; 
+#define deb(x) cout <<"\n"<< (#x) << " = " << (x) << "\n"
+const long long  INF = 1e18;
+const long long mod=1e9+7 ;
+void inputoutput()
+{
+	ios_base::sync_with_stdio(0);
+	cin.tie(0); 
+	#ifndef ONLINE_JUDGE
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
+	#endif
+	    
+}
+
+// There are n apples with known weights. Your task is to divide the apples into two groups so that the difference between the weights of the groups is minimal.
+// Input
+// The first input line has an integer n: the number of apples.
+// The next line has n integers p1,p2,…,pn: the weight of each apple.
+
+ 
+int32_t main()
+{ 
+	inputoutput() ;
+
+	long long int n;
+	cin>>n;
+
+	vector<int> ar(n);
+	long long int tsum=0;
+	for(long long int i=0 ; i<n ; ++i)
+	{
+		cin>>ar[i];
+		tsum+=ar[i];
+	}
+
+	if(n==1)
+	{
+		cout<<ar[0];
+	}
+	else
+	{
+
+	long long int dif=INT_MAX ;
+
+	for(long long int i=1 ; i<pow(2,n)-1 ; ++i)
+	{
+		long long int x=i;
+		string s;
+		int k=0 ;
+		while(x!=0)
+		{
+			s.push_back(x%2+48);
+			++k;
+			x/=2;
+		}	
+		while(s.size()<n)
+		{
+			s.push_back('0');
+			++k;
+		}
+		reverse(s.begin(),s.end());
+		long long int sum=0;
+
+		for(long long int i=0 ; i<k ; ++i)
+		{
+			if(s[i]=='1')
+			{
+				sum+=ar[i];
+			}
+		}
+
+		dif=min(dif,abs(tsum-2*sum));
+	}
+	cout<<dif<<"\n";
+}
+
+
+
+	return 0;
+}
